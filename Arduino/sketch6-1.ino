@@ -1,6 +1,6 @@
 int potPin = A0;
 int ledPin = 13;
-in val = 0;
+int val = 0;
 
 void setup() {
     Serial.begin(9600);

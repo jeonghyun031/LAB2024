@@ -15,7 +15,12 @@ void loop() {
     int val= map(valBefore, 0, 1023, 1, 3);
     Serial.print("값 : ");
     Serial.println(val);
-    if ( val ==2 ) {
+    if ( val == 1) {
+        digitalWrite(led1, HIGH);
+        digitalWrite(led2, LOW);
+        digitalWrite(led3, LOW);
+    }
+    if ( val == 2) {
         digitalWrite(led1, HIGH);
         digitalWrite(led2, HIGH);
         digitalWrite(led3, LOW);
