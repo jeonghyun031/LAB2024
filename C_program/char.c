@@ -3,7 +3,7 @@
 int main() {
     char a = 'A';
     char b[] = "Programming Language";
-    char *c = "SON LEE KYEONG";
+    char *c = "Hong Gil Dong";
 
     printf("%c\n", a);
     printf("%s\n", b);
