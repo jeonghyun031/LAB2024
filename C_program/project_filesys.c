@@ -3,11 +3,17 @@
 #include <string.h>
 
 #define MAX_NAME 50
+#define BLOCK_SIZE 512
+
+typedef struct Block {
+    char data[BLOCK_SIZE];
+    struct Block *next;
+} Block;
 
 typedef struct Node {
     char name[MAX_NAME];
     int is_file;
-    char *content;
+    Block *blocks;
     struct Node **children;
     int child_count;
     int max_children;
@@ -26,6 +32,7 @@ Node* create_node(const char *name, int is_file, Node *parent) {
     node->child_count = 0;
     node->max_children = 2;
     node->parent = parent;
+    node->blocks = NULL;
 
     if (!is_file) {
         node->children = (Node**)malloc(sizeof(Node*) * node->max_children);
@@ -35,8 +42,9 @@ Node* create_node(const char *name, int is_file, Node *parent) {
             exit(1);
         }
     } else {
-        node->content = NULL;
+        node->children = NULL;
     }
+
     return node;
 }
 
@@ -51,37 +59,39 @@ void expand_children(Node *node) {
     }
 }
 
-void create_node_in_dir(Node *current, const char *name, int is_file) {
-    for (int i = 0; i < current->child_count; i++) {
-        if (!strcmp(current->children[i]->name, name)) {
-            printf("Error: File or directory '%s' already exists in '%s'.\n", name, current->name);
-            return;
-        }
+void add_child_to_directory(Node *dir, Node *child) {
+    expand_children(dir);
+    dir->children[dir->child_count] = child;
+    dir->child_count++;
+}
+
+void add_block_to_file(Node *file_node, const char *content) {
+    Block *new_block = (Block*)malloc(sizeof(Block));
+    if (!new_block) {
+        printf("Error: Memory allocation failed for block.\n");
+        exit(1);
     }
+    
+    strncpy(new_block->data, content, BLOCK_SIZE);
+    new_block->next = NULL;
 
-    expand_children(current);
-    Node *new_node = create_node(name, is_file, current);
-    current->children[current->child_count++] = new_node;
-
-    if (is_file) {
-        FILE *fp = fopen(name, "w");
-        if (fp == NULL) {
-            printf("Error: Could not create file '%s'.\n", name);
-            return;
+    if (file_node->blocks == NULL) {
+        file_node->blocks = new_block;
+    } else {
+        Block *last_block = file_node->blocks;
+        while (last_block->next != NULL) {
+            last_block = last_block->next;
         }
-        fclose(fp);
+        last_block->next = new_block;
     }
-
-    printf("%s '%s' created in '%s'.\n", is_file ? "File" : "Directory", name, current->name);
 }
 
 void write_file(Node *current, const char *name, const char *content) {
     for (int i = 0; i < current->child_count; i++) {
         if (!strcmp(current->children[i]->name, name) && current->children[i]->is_file) {
-            free(current->children[i]->content);
-            current->children[i]->content = strdup(content);
-
-            FILE *fp = fopen(name, "w");
+            add_block_to_file(current->children[i], content);
+            
+            FILE *fp = fopen(name, "a");
             if (fp == NULL) {
                 printf("Error: Could not open file '%s'.\n", name);
                 return;
@@ -99,18 +109,12 @@ void write_file(Node *current, const char *name, const char *content) {
 void read_file(Node *current, const char *name) {
     for (int i = 0; i < current->child_count; i++) {
         if (!strcmp(current->children[i]->name, name) && current->children[i]->is_file) {
-            FILE *fp = fopen(name, "r");
-            if (fp == NULL) {
-                printf("Error: Could not open file '%s'.\n", name);
-                return;
-            }
-
-            char buffer[1024];
             printf("Content of '%s':\n", name);
-            while (fgets(buffer, sizeof(buffer), fp)) {
-                printf("%s", buffer);
+            Block *block = current->children[i]->blocks;
+            while (block != NULL) {
+                printf("%s", block->data);
+                block = block->next;
             }
-            fclose(fp);
             return;
         }
     }
@@ -125,7 +129,12 @@ void delete_node_recursive(Node *node) {
         }
         free(node->children);
     } else {
-        free(node->content);
+        Block *block = node->blocks;
+        while (block != NULL) {
+            Block *temp = block;
+            block = block->next;
+            free(temp);
+        }
     }
     free(node);
 }
@@ -140,7 +149,6 @@ void delete_file(Node *current, const char *name) {
                     printf("File '%s' deleted from filesystem.\n", name);
                 }
             }
-
             delete_node_recursive(current->children[i]);
             for (int j = i; j < current->child_count - 1; j++) {
                 current->children[j] = current->children[j + 1];
@@ -170,7 +178,8 @@ void free_filesystem(Node *root) {
 void background_operations(Node *root) {
     printf("Running background operations...\n");
 
-    create_node_in_dir(root, "test.txt", 1);
+    Node *file = create_node("test.txt", 1, root);
+    add_child_to_directory(root, file);
 
     write_file(root, "test.txt", "Hello, this is a test file!");
 
@@ -203,7 +212,9 @@ int main() {
             printf("Is it a file (1) or directory (0)? ");
             int is_file;
             scanf("%d", &is_file);
-            create_node_in_dir(current_dir, name, is_file);
+
+            Node *new_node = create_node(name, is_file, current_dir);
+            add_child_to_directory(current_dir, new_node);
         } else if (strcmp(command, "delete") == 0) {
             printf("Enter name: ");
             scanf("%s", name);
