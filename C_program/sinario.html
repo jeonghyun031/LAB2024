@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대경권 AX 전환 시나리오: 로봇 & 디지털 헬스케어</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        /* Custom Utilities for Diagram Shapes (No SVG) */
+        .flow-box {
+            position: relative;
+        }
+
+        .flow-arrow-down::after {
+            content: '▼';
+            display: block;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .flow-arrow-right::after {
+            content: '▶';
+            position: absolute;
+            right: -1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+        }
+
+        @media (max-width: 768px) {
+            .flow-arrow-right::after {
+                content: '▼';
+                position: static;
+                display: block;
+                text-align: center;
+                transform: none;
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+    <!-- 
+    Color Palette: "Future Tech Blue"
+    Primary: #1E3A8A (Blue 900)
+    Secondary: #3B82F6 (Blue 500)
+    Accent: #06B6D4 (Cyan 500)
+    Background: #F0F9FF (Sky 50)
+    Text: #0F172A (Slate 900)
+    -->
+    <!-- 
+    Narrative Plan:
+    1. Title/Hook: Convergence of Robot & Brain.
+    2. Overview: Why this combination?
+    3. Process: 3-Step Roadmap (Timeline).
+    4. Detailed Scenarios: Manufacturing AX vs. Medical AX (Diagrams).
+    5. Impact: Economic data (Charts).
+    -->
+    <!-- Chosen Visualization Logic:
+    1. Roadmap -> Vertical List (CSS styled) for clarity of steps.
+    2. Economic Impact -> Bar/Line Combo Chart (Compare Jobs vs Money).
+    3. Data Growth -> Line Chart (Change over time).
+    -->
+    <!-- NO SVG USED. NO MERMAID JS USED. -->
+</head>
+
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-cyan-200 selection:text-blue-900">
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-blue-900 via-blue-800 to-cyan-800 text-white py-12 px-4 shadow-xl">
+        <div class="max-w-6xl mx-auto text-center">
+            <div
+                class="inline-block bg-cyan-500 text-xs font-bold px-3 py-1 rounded-full mb-4 shadow-lg tracking-widest uppercase">
+                Daegyeong Region Project
+            </div>
+            <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight">
+                대경권 AX 전환 시나리오:<br>
+                <span class="text-cyan-400">첨단 로봇</span> & <span class="text-cyan-400">디지털 브레인</span> 융합
+            </h1>
+            <p class="text-blue-200 text-lg md:text-xl max-w-3xl mx-auto">
+                자율 제조 로봇과 뇌발달 질환 솔루션을 결합한 대구형 M.AX(Manufacturing AI Transformation) 생태계 구축 전략
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-12 space-y-16">
+
+        <!-- Section 1: Project Overview (Card Style) -->
+        <section>
+            <div class="flex items-center space-x-2 mb-6">
+                <span class="text-2xl">📋</span>
+                <h2 class="text-2xl font-bold text-blue-900">1. 작품 개요 (Project Overview)</h2>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-8 border-l-8 border-cyan-500">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-slate-700">배경 및 필요성</h3>
+                        <p class="text-slate-600 mb-4 leading-relaxed">
+                            대경권(대구·경북)은 전통적인 제조 산업의 중심지이나, 최근 산업 정체와 고령화로 인한 성장 동력 저하를 겪고 있습니다. 동시에 자폐 스펙트럼 및 치매 등 뇌질환
+                            환자의 급증은 심각한 사회적 비용을 유발하고 있습니다.
+                        </p>
+                        <p class="text-slate-600 leading-relaxed">
+                            본 프로젝트는 지역의 강점인 <strong class="text-blue-600">로봇 인프라(국가로봇테스트필드)</strong>와 <strong
+                                class="text-blue-600">디지털 의료(뇌질환)</strong>를 결합하여, 제조 현장의 생산성 혁신과 의료 현장의 치료 혁신을 동시에 달성하는
+                            새로운 AX 모델을 제안합니다.
+                        </p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
+                        <h3 class="text-lg font-bold text-blue-800 mb-4 text-center">핵심 융합 컨셉</h3>
+                        <div class="flex flex-col items-center justify-center space-y-4">
+                            <div class="text-center">
+                                <span class="text-4xl">🏭</span>
+                                <div class="font-bold mt-2">제조 AX</div>
+                                <div class="text-sm text-slate-500">자율 제조 로봇</div>
+                            </div>
+                            <div class="text-2xl text-cyan-500 font-black">➕</div>
+                            <div class="text-center">
+                                <span class="text-4xl">🧠</span>
+                                <div class="font-bold mt-2">의료 AX</div>
+                                <div class="text-sm text-slate-500">디지털 치료제 (DTx)</div>
+                            </div>
+                            <div class="text-2xl text-cyan-500 font-black">⬇</div>
+                            <div
+                                class="bg-white px-6 py-3 rounded-full shadow-md font-bold text-blue-700 border border-blue-200">
+                                대구형 M.AX 생태계
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Process Roadmap (Timeline) -->
+        <section>
+            <div class="flex items-center space-x-2 mb-6">
+                <span class="text-2xl">🚀</span>
+                <h2 class="text-2xl font-bold text-blue-900">2. 수행 과정 (3단계 로드맵)</h2>
+            </div>
+            <p class="text-slate-600 mb-8">
+                2026년부터 2030년까지, 인프라 구축에서 글로벌 확산에 이르는 체계적인 3단계 실행 전략입니다.
+            </p>
+
+            <div class="relative border-l-4 border-blue-200 ml-4 md:ml-8 space-y-12">
+                <!-- Phase 1 -->
+                <div class="relative pl-8 md:pl-12">
+                    <div
+                        class="absolute -left-[14px] top-0 bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-lg">
+                        1</div>
+                    <div
+                        class="bg-white p-6 rounded-lg shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                        <div class="flex flex-wrap justify-between items-baseline mb-2">
+                            <h3 class="text-xl font-bold text-blue-800">인프라 구축 및 데이터 표준화</h3>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded">2026 -
+                                2027</span>
+                        </div>
+                        <ul class="list-disc list-inside text-slate-600 space-y-1">
+                            <li>국가로봇테스트필드 내 실환경 실증 데이터 수집 체계 가동</li>
+                            <li>대구 6개 상급 종합병원 연계 <strong>뇌질환 임상 데이터 5,000건</strong> 확보</li>
+                            <li>의료-제조 융합 데이터 표준화 가이드라인 수립</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Phase 2 -->
+                <div class="relative pl-8 md:pl-12">
+                    <div
+                        class="absolute -left-[14px] top-0 bg-cyan-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-lg">
+                        2</div>
+                    <div
+                        class="bg-white p-6 rounded-lg shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                        <div class="flex flex-wrap justify-between items-baseline mb-2">
+                            <h3 class="text-xl font-bold text-cyan-700">기술 융합 및 실증 모델 개발</h3>
+                            <span class="bg-cyan-100 text-cyan-800 text-xs font-bold px-2 py-1 rounded">2028 -
+                                2029</span>
+                        </div>
+                        <ul class="list-disc list-inside text-slate-600 space-y-1">
+                            <li><strong>로봇 보조 치료 시스템</strong> 프로토타입 개발 (Social Robot + DTx)</li>
+                            <li>수성알파시티 AI 기업 ↔ 제조 기업 매칭 'AX 실증산단' 조성</li>
+                            <li>자율 공정 도입 스마트 팩토리 13개소 확대</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Phase 3 -->
+                <div class="relative pl-8 md:pl-12">
+                    <div
+                        class="absolute -left-[14px] top-0 bg-slate-700 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-lg">
+                        3</div>
+                    <div
+                        class="bg-white p-6 rounded-lg shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                        <div class="flex flex-wrap justify-between items-baseline mb-2">
+                            <h3 class="text-xl font-bold text-slate-700">상용화 및 글로벌 확산</h3>
+                            <span class="bg-slate-100 text-slate-800 text-xs font-bold px-2 py-1 rounded">2030+</span>
+                        </div>
+                        <ul class="list-disc list-inside text-slate-600 space-y-1">
+                            <li>식약처 인허가 및 국제 안전 인증(ISO) 획득</li>
+                            <li>대구-광주 <strong>달빛 AI 트윈 허브</strong> 구축 및 남부권 경제권 완성</li>
+                            <li>글로벌 시장 진출 (AX 유니콘 기업 배출)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Detailed Content (Visualized) -->
+        <section>
+            <div class="flex items-center space-x-2 mb-6">
+                <span class="text-2xl">🔍</span>
+                <h2 class="text-2xl font-bold text-blue-900">3. 상세 시나리오 (Detailed Scenarios)</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Manufacturing AX -->
+                <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-blue-600">
+                    <h3 class="text-lg font-bold text-blue-800 mb-4 flex items-center">
+                        <span class="text-2xl mr-2">🏭</span> 제조 AX: 자율 제조 로봇
+                    </h3>
+                    <p class="text-sm text-slate-600 mb-6">
+                        달성군 국가산단을 중심으로 데이터 기반의 자율 공정을 도입하여 생산 효율을 극대화합니다. 로봇이 단순 반복 작업을 넘어 공정 최적화를 스스로 수행합니다.
+                    </p>
+
+                    <!-- CSS Flow Diagram for Manufacturing -->
+                    <div class="space-y-4">
+                        <div
+                            class="bg-blue-50 p-3 rounded text-center text-sm font-bold border border-blue-200 flow-arrow-down">
+                            데이터 수집 (IoT 센서)
+                        </div>
+                        <div
+                            class="bg-blue-100 p-3 rounded text-center text-sm font-bold border border-blue-300 flow-arrow-down">
+                            AI 분석 & 이상 감지
+                        </div>
+                        <div class="bg-blue-600 text-white p-3 rounded text-center text-sm font-bold shadow-lg">
+                            로봇 자율 제어 & 공정 최적화
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Medical AX -->
+                <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-cyan-500">
+                    <h3 class="text-lg font-bold text-cyan-800 mb-4 flex items-center">
+                        <span class="text-2xl mr-2">🏥</span> 의료 AX: 디지털 브레인
+                    </h3>
+                    <p class="text-sm text-slate-600 mb-6">
+                        엘비스(LVIS), 세븐포인트원 등의 기술을 활용하여 뇌질환을 조기에 진단하고, 사회적 로봇이 환자와 교감하며 재활을 돕습니다.
+                    </p>
+
+                    <!-- CSS Flow Diagram for Medical -->
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-2">
+                            <div class="bg-cyan-50 flex-1 p-3 rounded border border-cyan-200 text-center text-sm">
+                                <strong>진단</strong><br>AI 뇌파 분석
+                            </div>
+                            <div class="text-cyan-400">▶</div>
+                            <div class="bg-cyan-100 flex-1 p-3 rounded border border-cyan-300 text-center text-sm">
+                                <strong>처방</strong><br>맞춤형 DTx
+                            </div>
+                        </div>
+                        <div class="text-center text-cyan-400 font-bold">▼</div>
+                        <div class="bg-cyan-600 text-white p-3 rounded text-center text-sm font-bold shadow-lg">
+                            <strong>치료/케어</strong><br>로봇 상호작용 & 정서 케어
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Text Box -->
+            <div class="mt-8 bg-slate-100 rounded-lg p-6 border border-slate-200">
+                <h4 class="font-bold text-slate-700 mb-2">💡 핵심 인프라 활용 전략</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-600">
+                    <div>
+                        <strong class="text-blue-700">국가로봇테스트필드:</strong><br>
+                        2,448TB급 데이터 센터를 운영하여 로봇의 서비스 품질과 안전성을 실환경에서 검증합니다. 제조 로봇의 불량률 감소와 서비스 로봇의 대인 안전성을 확보하는 전초기지 역할을
+                        수행합니다.
+                    </div>
+                    <div>
+                        <strong class="text-blue-700">수성알파시티:</strong><br>
+                        비수도권 최대 IT/SW 집적지로서, 2030년까지 5,000명의 AI 전문 인력을 양성합니다. 의료 및 제조 현장에 즉시 투입 가능한 실무형 AX 인재의 요람이 될
+                        것입니다.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Expected Effects (Charts) -->
+        <section>
+            <div class="flex items-center space-x-2 mb-6">
+                <span class="text-2xl">📈</span>
+                <h2 class="text-2xl font-bold text-blue-900">4. 기대 효과 (Impact Analysis)</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Chart 1: Economic Impact -->
+                <div>
+                    <h3 class="text-center font-bold text-slate-700 mb-4">경제적 파급 효과 (2030년 목표)</h3>
+                    <div class="chart-container">
+                        <canvas id="economicChart"></canvas>
+                    </div>
+                    <p class="text-xs text-center text-slate-500 mt-2">
+                        * 생산유발효과(조 원) 및 일자리 창출(만 명)
+                    </p>
+                </div>
+
+                <!-- Chart 2: Clinical Data Growth -->
+                <div>
+                    <h3 class="text-center font-bold text-slate-700 mb-4">뇌질환 임상 데이터 확보 목표</h3>
+                    <div class="chart-container">
+                        <canvas id="dataGrowthChart"></canvas>
+                    </div>
+                    <p class="text-xs text-center text-slate-500 mt-2">
+                        * 누적 데이터셋 건수 (단위: 건)
+                    </p>
+                </div>
+            </div>
+
+            <!-- Summary Statistics Cards -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                <div class="bg-blue-600 text-white p-4 rounded-lg text-center shadow-lg">
+                    <div class="text-2xl md:text-3xl font-black">9.4조</div>
+                    <div class="text-xs md:text-sm opacity-90">생산유발효과</div>
+                </div>
+                <div class="bg-cyan-500 text-white p-4 rounded-lg text-center shadow-lg">
+                    <div class="text-2xl md:text-3xl font-black">5.2만</div>
+                    <div class="text-xs md:text-sm opacity-90">일자리 창출</div>
+                </div>
+                <div class="bg-white text-slate-800 border border-slate-200 p-4 rounded-lg text-center shadow-sm">
+                    <div class="text-2xl md:text-3xl font-black text-blue-900">20개</div>
+                    <div class="text-xs md:text-sm text-slate-500">AX 유니콘 육성</div>
+                </div>
+                <div class="bg-white text-slate-800 border border-slate-200 p-4 rounded-lg text-center shadow-sm">
+                    <div class="text-2xl md:text-3xl font-black text-blue-900">No.1</div>
+                    <div class="text-xs md:text-sm text-slate-500">글로벌 로봇 도시</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <footer class="bg-slate-800 text-slate-300 rounded-xl p-8 text-center mt-12">
+            <h3 class="text-xl font-bold text-white mb-2">결론 (Conclusion)</h3>
+            <p class="max-w-2xl mx-auto leading-relaxed">
+                본 프로젝트는 기술(AI/로봇)과 복지(의료)가 결합된 대경권만의 특화 모델입니다.
+                <br>지역 소멸 위기를 극복하고, 대한민국이 <strong>'글로벌 AI 로봇 수도'</strong>로 도약하는 핵심 동력이 될 것입니다.
+            </p>
+        </footer>
+
+    </main>
+
+    <script>
+        // Common Chart Options including the MANDATORY Tooltip Configuration
+        const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: { family: "'Noto Sans KR', sans-serif" }
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                    titleFont: { size: 14, family: "'Noto Sans KR', sans-serif" },
+                    bodyFont: { size: 13, family: "'Noto Sans KR', sans-serif" },
+                    padding: 10,
+                    cornerRadius: 8,
+                    callbacks: {
+                        title: function (tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                                return label.join(' ');
+                            } else {
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        // Chart 1: Economic Impact (Mixed Chart)
+        const ctxEconomic = document.getElementById('economicChart').getContext('2d');
+        new Chart(ctxEconomic, {
+            type: 'bar',
+            data: {
+                labels: ['현재 (2025)', '1단계 (2027)', '2단계 (2029)', '최종 (2030)'],
+                datasets: [
+                    {
+                        label: '생산유발효과 (조 원)',
+                        data: [2.1, 4.5, 7.2, 9.4],
+                        backgroundColor: '#3B82F6', // Blue 500
+                        borderRadius: 4,
+                        order: 2
+                    },
+                    {
+                        label: '일자리 창출 (만 명)',
+                        data: [1.2, 2.8, 4.1, 5.2],
+                        type: 'line',
+                        borderColor: '#06B6D4', // Cyan 500
+                        backgroundColor: '#06B6D4',
+                        borderWidth: 3,
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: '#06B6D4',
+                        pointRadius: 5,
+                        tension: 0.3,
+                        yAxisID: 'y1',
+                        order: 1
+                    }
+                ]
+            },
+            options: {
+                ...commonOptions,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { display: false },
+                        title: { display: true, text: '조 원' }
+                    },
+                    y1: {
+                        beginAtZero: true,
+                        position: 'right',
+                        grid: { display: false },
+                        title: { display: true, text: '만 명' }
+                    }
+                }
+            }
+        });
+
+        // Chart 2: Data Growth (Line Area Chart)
+        const ctxData = document.getElementById('dataGrowthChart').getContext('2d');
+        new Chart(ctxData, {
+            type: 'line',
+            data: {
+                labels: ['2026', '2027', '2028', '2029', '2030'],
+                datasets: [{
+                    label: '누적 임상 데이터 (건)',
+                    data: [500, 1500, 3200, 4500, 5200],
+                    borderColor: '#1E3A8A', // Blue 900
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)', // Blue 500 transparent
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: '#F59E0B', // Amber 500 Accent
+                    pointBorderColor: '#fff',
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                }]
+            },
+            options: {
+                ...commonOptions,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#f1f5f9' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
